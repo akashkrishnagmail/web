@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10a PROGRAM</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            var len=$("textarea").attr('maxlength');
+            $("span").text(len) 
+            $("textarea").keyup(function (){
+               
+                var nc=$(this).val().length;
+                $("#rc").text(len-nc);
+             });
+             $("[type='checkbox']").click(function (){
+                if($(this).is(':checked'))
+                {
+                    $("[type='button']").removeAttr('disabled');
+                }
+                else
+                {
+                    $("[type='button']").attr('disabled','disabled'); 
+                }
+             });
+        });
+    </script>
+</head>
+<body>
+    <form>
+    <h1>10 a program</h1>
+    <h2>ENTER THE <span>20 </span>CHARECTERS ONLY</h2>
+    <textarea name="text" maxlength="20" cols="30" rows="10"></textarea>
+    <h3>Remaing charecters are<span id="rc">10</span></h3>
+    <input type="checkbox" id="agree">I agreed the following condittion:
+    
+    <input type="button" value="I agree" disabled>
+</form>
+</body>
+</html>
