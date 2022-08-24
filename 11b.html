@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.6.0.min.js"> </script>
+    <script>
+$(function (){
+           $("button").click(function ()
+           {
+            if($(this).text()=='Larger')
+            {
+                $("img").animate({'height':'1000px'},100);
+                $(this).text('Smaller');
+            }
+            else
+            {
+                $("img").animate({'height':'500px'},100);
+                $(this).text('Larger');
+            }
+           }
+           );
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <img src="index.jpeg" alt="">
+</div>
+<button>Larger</button>
+</body>
+</html>
