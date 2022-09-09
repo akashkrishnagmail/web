@@ -135,3 +135,55 @@ mysql> select * from counts;
 13 rows in set (0.00 sec)
 
 
+
+ select * from Candidate 
+ where canid in (select candid from counts 
+ join constituency on counts.cons_id=constituency.cons_id 
+ group by candid having count(distinct(state))>1);
+
+select state from constituency group by state having count(state) in (select max(count(state))from constituency group by state);
+
+
+
+DELIMITER//
+create procedure abc(IN vid int(10),In Vname varchar(20),in age int(10),in city varchar(20),state varchar(20))
+begin
+declare msg varchar(20);
+if age>=18 then
+insert into voter (vid,vname,vage,vaddr)
+values(vid,vname,age,city);
+set msg="row inserted";
+else
+set msg="voter not eligible";
+end if;
+3
+DELIMITER $$
+create trigger trg 
+after insert 
+on Voter for each row
+begin update constituency 
+set nofvote=nofvote+3 where
+ cons_id = new.cons_id;
+end$$
+
+4
+
+mysql> DELIMITER $$
+mysql> create procedure new1(sname varchar(20))
+    -> begin
+    -> select nofvote from constituency where sname=csname ;
+    -> end$$
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> 
+mysql> call new1('kadaba');
+    -> $$
++---------+
+| nofvote |
++---------+
+|   66000 |
++---------+
+1 row in set (0.00 sec)
+
+
+
